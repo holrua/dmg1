@@ -6,6 +6,7 @@ const { json, setCors } = require('../lib/util');
 module.exports = async (req, res) => {
   setCors(req, res);
   return json(res, 200, {
+    version: '1.1.0',
     maxSources: limits.maxSources,
     sourceMaxMb: Math.round(limits.sourceMaxBytes / 1048576),
     outputMaxMb: Math.round(limits.outputMaxBytes / 1048576),

@@ -226,15 +226,15 @@
       <p>أنشئ مهمة دمج بإرسال روابط الفيديوهات، ثم نفّذ الدمج واستلم رابط الفيديو النهائي. لا تحتاج أي مفاتيح أو حساب.</p>
       <h3>1) إنشاء مهمة دمج</h3>
       <pre class="code"><span class="c"># ترتيب الروابط = ترتيب الدمج</span>
-curl -X POST https://YOUR-DOMAIN/api/jobs \
+curl -X POST https://dmg1.vercel.app/api/jobs \
   -H "Content-Type: application/json" \
   -d '{"videos":["https://example.com/a.mp4","https://example.com/b.mp4"]}'</pre>
       <p>الاستجابة: <code>{"jobId":"...","statusUrl":"...","processUrl":"..."}</code></p>
       <h3>2) تنفيذ الدمج واستلام الرابط النهائي</h3>
-      <pre class="code">curl -X POST https://YOUR-DOMAIN/api/jobs/JOB_ID/process</pre>
+      <pre class="code">curl -X POST https://dmg1.vercel.app/api/jobs/JOB_ID/process</pre>
       <p>الاستجابة عند النجاح: <code>{"status":"done","videoUrl":"https://.../api/jobs/JOB_ID/video","expiresAt":"..."}</code></p>
       <h3>3) متابعة الحالة (اختياري)</h3>
-      <pre class="code">curl https://YOUR-DOMAIN/api/jobs/JOB_ID</pre>
+      <pre class="code">curl https://dmg1.vercel.app/api/jobs/JOB_ID</pre>
       <h3>جميع النقاط</h3>
       <table class="endpoints">
         <tr><th>Method</th><th>Endpoint</th><th>الوصف</th></tr>

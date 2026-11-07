@@ -4,7 +4,7 @@
   "private": true,
   "description": "Video merger — merge videos by URL or upload into one high-quality MP4. Public API, Turso storage with 24h auto-delete, Vercel-ready.",
   "engines": {
-    "node": ">=18"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "node scripts/local-dev.js",
@@ -15,5 +15,8 @@
     "@libsql/client": "^0.14.0",
     "ffmpeg-static": "^5.2.0",
     "ffprobe-static": "^3.1.0"
+  },
+  "allowScripts": {
+    "ffmpeg-static": true
   }
 }

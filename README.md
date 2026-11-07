@@ -1,5 +1,7 @@
 # 🎬 dmg — موقع دمج الفيديوهات مع API عامة
 
+> **عربي تجريبي مباشر:** [https://dmg1.vercel.app](https://dmg1.vercel.app)
+
 ارفع فيديوهاتك **برابط** أو **من جهازك**، رتّبها، وادمجها في **فيديو واحد بجودة عالية** (MP4 · H.264 · CRF 18 · حتى 1080p). كل شيء يُحفظ في قاعدة بيانات **Turso** ويُحذف **تلقائيًا بعد 24 ساعة**. واجهة برمجية **API عامة بدون تسجيل دخول** للمطورين، جاهزة للنشر على **Vercel**.
 
 ---
@@ -50,7 +52,7 @@ GET /api/jobs/<id>/video  ← بث الفيديو الناتج (يدعم Range)
 ### 1) إنشاء مهمة دمج
 
 ```bash
-curl -X POST https://YOUR-DOMAIN/api/jobs \
+curl -X POST https://dmg1.vercel.app/api/jobs \
   -H "Content-Type: application/json" \
   -d '{"videos":["https://example.com/a.mp4","https://example.com/b.mp4"]}'
 ```
@@ -61,8 +63,8 @@ curl -X POST https://YOUR-DOMAIN/api/jobs \
 {
   "jobId": "abc123",
   "status": "queued",
-  "statusUrl": "https://YOUR-DOMAIN/api/jobs/abc123",
-  "processUrl": "https://YOUR-DOMAIN/api/jobs/abc123/process",
+  "statusUrl": "https://dmg1.vercel.app/api/jobs/abc123",
+  "processUrl": "https://dmg1.vercel.app/api/jobs/abc123/process",
   "expiresAt": "2026-11-08T13:00:00.000Z"
 }
 ```
@@ -70,15 +72,15 @@ curl -X POST https://YOUR-DOMAIN/api/jobs \
 ### 2) تنفيذ الدمج واستلام الرابط النهائي
 
 ```bash
-curl -X POST https://YOUR-DOMAIN/api/jobs/abc123/process
+curl -X POST https://dmg1.vercel.app/api/jobs/abc123/process
 ```
 
 ```json
 {
   "jobId": "abc123",
   "status": "done",
-  "videoUrl": "https://YOUR-DOMAIN/api/jobs/abc123/video",
-  "downloadUrl": "https://YOUR-DOMAIN/api/jobs/abc123/video?download=1",
+  "videoUrl": "https://dmg1.vercel.app/api/jobs/abc123/video",
+  "downloadUrl": "https://dmg1.vercel.app/api/jobs/abc123/video?download=1",
   "size": 734593,
   "duration": 4.0,
   "resolution": "1280x720",
@@ -91,7 +93,7 @@ curl -X POST https://YOUR-DOMAIN/api/jobs/abc123/process
 ### 3) متابعة الحالة (اختياري)
 
 ```bash
-curl https://YOUR-DOMAIN/api/jobs/abc123
+curl https://dmg1.vercel.app/api/jobs/abc123
 ```
 
 ### النقاط المتاحة
@@ -134,6 +136,7 @@ npm run smoke              # اختبار HTTP كامل عبر خادم التط
 ## 📏 حدود وضوابط
 
 - روابط الفيديو يجب أن تكون **عامة ومباشرة** (تُنزَّل من الخادم — لا مشاكل CORS).
+- **ملفات تجريبية جاهزة** للتجربة الفورية: `https://dmg1.vercel.app/test/a.mp4` و `https://dmg1.vercel.app/test/b.mp4`
 - المخرجات تُخزَّن كـ Blobs مجزأة في Turso؛ الخطة المجانية 5GB — راقب الاستهلاك إن زاد الاستخدام.
 - الخطة المجانية على Vercel مع Fluid Compute تسمح حتى 300 ثانية للدالة: اجعل مجموع مدد الفيديوهات معقولًا (أفضل أداء حتى ~5 دقائق مصادر عند `medium`، أو استخدم `veryfast`).
 - لا يوجد تسجيل دخول عمدًا (طلب الخدمة العامة)؛ الحدود + الحذف التلقائي هما خط الحماية.
